@@ -1,0 +1,50 @@
+{
+  "id": "emby",
+  "name": "Emby / Jellyfin",
+  "version": "0.1.0",
+  "minAppVersion": "0.1.21",
+  "main": "index.js",
+  "playback": "stream",
+  "permissions": {
+    "network": ["*"]
+  },
+  "settings": [
+    {
+      "key": "server",
+      "label": "Server Address",
+      "help": "Your Emby or Jellyfin server, such as http://192.168.1.2:8096. Just the host also works: port 8096 is assumed.",
+      "link": "https://github.com/LYJW131/mygo-music-emby-jellyfin#setting-up"
+    },
+    {
+      "key": "apiKey",
+      "label": "API Key",
+      "help": "Made in the server's dashboard: Advanced > API Keys in Emby, API Keys in Jellyfin. With a key, the user name below says whose library to use, and the password isn't needed. Leave it empty to sign in with a user name and password."
+    },
+    {
+      "key": "username",
+      "label": "User Name",
+      "help": "Your user on the server. With an API key and no user name, the server's administrator is used."
+    },
+    {
+      "key": "password",
+      "label": "Password",
+      "help": "Your password, for signing in without an API key. Empty for a user without one."
+    }
+  ],
+  "navigation": [
+    { "builtin": "home", "title": "Home" },
+    { "builtin": "liked", "title": "Favorites" },
+    { "builtin": "savedAlbums", "title": "Albums" },
+    { "title": "Artists", "page": "artists", "icon": "artist" },
+    { "title": "Recently Added", "page": "recentlyAdded", "icon": "album" },
+    { "title": "Genres", "page": "genres", "icon": "note" },
+    { "builtin": "stations", "title": "Shuffle" }
+  ],
+  "requestHeaders": [
+    {
+      "hosts": ["{setting:server}"],
+      "kinds": ["image", "audio"],
+      "headers": { "authorization": "MediaBrowser Token=\"{storage:token}\"" }
+    }
+  ]
+}
